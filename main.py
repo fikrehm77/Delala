@@ -12,8 +12,8 @@ bot = telebot.TeleBot(TOKEN)
 
 # Product management
 products = {}
-admin_group_id = -1002262363425  # Replace with your admin group ID
-channel_id = -1002442298921  # Replace with your public channel ID
+admin_group_id = -4543999732  # Replace with your admin group ID
+channel_id = -1002359300420  # Replace with your public channel ID
 
 # Price increment options
 PRICE_INCREMENTS = [5, 7.5, 10, 15, 20, 25, 30, 40, 50, 60, 70, 80, 90, 100,

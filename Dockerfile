@@ -1,19 +1,22 @@
-# Use the official Python image from the Docker Hub
-FROM python:3.11-slim
+# Base image
+FROM python:3.10-slim
 
 # Set the working directory
 WORKDIR /app
 
-# Copy the requirements and other files
-COPY pyproject.toml ./
-COPY main.py ./
-COPY .env ./
+# Copy Poetry installation script
+RUN apt update && apt install -y curl
+RUN curl -sSL https://install.python-poetry.org | python3 -
 
-# Install Poetry
-RUN pip install poetry
+# Add Poetry to PATH
+ENV PATH="/root/.local/bin:$PATH"
 
-# Install dependencies
-RUN poetry install --no-dev
+# Copy the Poetry files and install dependencies
+COPY pyproject.toml poetry.lock ./
+RUN poetry install --no-root --only main
 
-# Command to run the bot
+# Copy the bot files
+COPY . .
+
+# Run the bot
 CMD ["poetry", "run", "python", "main.py"]
